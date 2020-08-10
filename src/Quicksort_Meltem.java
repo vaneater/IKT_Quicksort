@@ -52,50 +52,75 @@ public class Quicksort_Vanessa extends ProfiledClass {
 
     }
 
-    static int partition(List<Integer> a, int lo, int hi) {
-        int pivot = a.get((hi + lo) / 2); //pivot ist unsere Mitte(index)
-        int i = lo;
-        int j = hi;
 
-        while(true) { //wann ist false und wann true?
-            while(a.get(i) >= pivot) { // wir vergleichen linke seite mit pivot/mitte
-                while(a.get(j) > pivot) { //wenn rechte seite größer ist als pivot
-                    --j; //dann rückt rechte seite eine stelle bzw index nach links
-                }
 
-                if (i >= j) { //überprüft ob linke seite größer gleich ist als rechte seite
-                    return j; //warum return j?
-                }
+    static int partitionMitte(List<Integer> a) {
 
-                int tmp = a.get(i); //warum tauschen wir hier linke mit rechter seite? warum wird i in tmp gespeichert
-                a.set(i, j);   // set(index, die zahlt selber)
-                a.set(j, tmp);
-                ++i;
-                --j;
+        int i = a.get[0];//erste Element der Liste
+        int j = a.get[a.length-1];//letzte Element der Liste
+        int pivot = (a.length / 2);
+
+        //Liste links = a[0] - a.[pivot-1];
+        //Liste rechts = a[pivot+1] - a.[a.length-1];
+
+            while(a.get(i) < pivot) {
+                i++;
+            }
+            while(a.get(j) > pivot) {
+                 j--;
             }
 
-            ++i;
-        }
+                if (i > j) {
+                    int a = a.get(i);
+                    a.get(i) = a.get(j);
+                    a.get(j) = a;
+                }
+                else{
+                    return j;
+                }
+        }//ist Liste komplett sortiert? Weil wir sortieren jeweils nur 2 listen.
+        // wann überprüfen wir die koplmette liste und wie oft?
     }
 
-    public void run() {
-        quicksort(this.field, 0, this.field.size() - 1);
-        int[] checks = new int[]{0, 5000, 600000, this.field.size() - 1};//woher kommen die zahlen 5000 und 600.000?
-        int[] var2 = checks; //dasselbe array unter einem anderen namen kopiert
-        int var3 = checks.length; //varibale die die Länge des array speichert
+    static int partitionRandom(List<Integer> a) {
+        Random rand = new Random();
+        int n = rand.nextInt(a.length(-1));
+        int pivot = n;
+        int i = a.get(0);
+        int j = a.get(a.length-1);
 
-        for(int var4 = 0; var4 < var3; ++var4) {
-            int check = var2[var4];
-            System.out.println("Element an Index " + check + ": " + this.field.get(check));
+            while(a.get(i) < pivot) {
+                i++;
+
+            while(a.get(j) > pivot) {
+                j--;
+            }
+
+            if (i < j) {
+                int a = a.get(i);
+                a.get(i) = a.get(j);
+                a.get(j) = a;
+            }
+            else{
+                return j;
+            }
         }
-
-        System.out.println("Element an Index " + this.outputIndex + ": " + this.field.get(this.outputIndex));
     }
 
     public static void main(String[] arguments) {
+        List <Integer> a = new ArrayList<Integer>();
+        a.add(3);
+        a.add(6);
+        a.add(1);
+        a.add(8);
+        a.add(7);
+
+
+        System.out.println(partitionMitte(a));
+
         //Profiler profiler = new Profiler(Quicksort_Vanessa.class, new Object(), Integer.parseInt(arguments[1]));
-        Profiler profiler = new Profiler(Quicksort_Vanessa.class, new Object[]{arguments[0], Integer.parseInt(arguments[1])});
-        profiler.start(); //profiler für Laufzeit rechnung
-        profiler.printResults();
+        //Profiler profiler = new Profiler(Quicksort_Meltem.class, new Object[]{arguments[0], Integer.parseInt(arguments[1])});
+        //profiler.start(); //profiler für Laufzeit rechnung
+        //profiler.printResults();
     }
 }
