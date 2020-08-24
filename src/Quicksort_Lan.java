@@ -5,8 +5,20 @@ import java.util.Random;
 
 public class Quicksort_Lan {
 
+public int pivot;
+public int wertHigh;
+public int wertLow;
 
-
+public Quicksort_Lan(ArrayList<Integer> a, int pivot, int wertLow, int wertHigh)
+{
+    System.out.println(a);
+    this.wertLow = a.get(0); //erste Element der Liste
+    System.out.println(wertLow);
+    this.wertHigh = a.get(a.size()-1); //letzte Element der Liste
+    System.out.println(wertHigh);
+    this.pivot = a.get(a.size() / 2);
+    System.out.println(pivot);
+}
     static int partition(int[] a, int lo, int hi) {
         Random random = new Random();
         int pivot = a[(hi + lo) / 2];
@@ -74,45 +86,46 @@ public class Quicksort_Lan {
      oder tuen wir das schon irgendwo?
      */
 
-    static void partitionMitte(ArrayList<Integer> a) {
 
-        int i = a.get(0); //erste Element der Liste
-        int j = a.get(a.size()-1); //letzte Element der Liste
-        int pivot = a.get(a.size() / 2);
+    // PROBLEM: bei der ersten rekursion wird index 8 aufgerufen. aber 8 ist der wert unseres letzten indexs
 
-        while (a.get(i) < pivot) {
-            i++;
+    void partitionMitte(ArrayList<Integer> a, int indexLow, int indexHigh) {
+
+
+        while (a.get(indexLow) < pivot) {
+            indexLow++;
         }
-        while (a.get(j) > pivot) {
-            j--;
+        System.out.println(wertHigh);
+        while (a.get(indexHigh) > pivot) {
+            indexHigh--;
         }
 
-        if (i > j) {
-            // Collections.swap(a, i, j); <- ich weiß nicht ob das eine gute idee ist lol
-            int temp = a.get(i);
-            a.add(i, (a.get(j)));
-            a.add(j, temp);
-            ++i;
-            --j;
+        if (wertLow > wertHigh) {
+            // Collections.swap(a, wertLow, wertHigh); <- ich weiß nicht ob das eine gute idee ist lol
+            int temp = a.get(wertLow);
+            a.add(wertLow, (a.get(wertHigh)));
+            a.add(wertHigh, temp);
+            ++wertLow;
+            --wertHigh;
         }
 
         /*
         google sagt: das muss jetzt rekursiv passieren, damit es weiter sortiert wird
-        low und high werden dabei hier im kunstruktor mitgegeben
+        indexLow und indexHigh werden dabei hier im kunstruktor mitgegeben
         es sind anfang und ende der liste
         kp ob das mit unserem aufbau möglich ist, anfang und ende der liste schon
         beim aufrufen der funktion anzugeben..
-
-        if(lo < j)
+*/
+        if(indexLow < wertHigh)
         {
-            partitionMitte(a, lo, j);
+            partitionMitte(a, indexLow, wertHigh);
         }
 
-        if(high > i)
+        if(indexHigh > wertLow)
         {
-            partitionMitte(a, i, high);
+            partitionMitte(a, wertLow, indexHigh);
         }
-        */
+
     }
 
 
@@ -120,21 +133,28 @@ public class Quicksort_Lan {
     // wann überprüfen wir die koplm
 
     public static void main(String[] args) {
-        int[] a = new int[]{1, 2, 3, 4, 5};
+        /*
+        int[] aa = new int[]{1, 2, 3, 4, 5};
         int[] b = new int[]{5, 3, 7, 2, 6};
         int[] c = new int[]{6, 7, 8, 2, 4, 9, 1};
-        System.out.println(" Der Status der Liste ist : " + arrayIsOrdered(c));
 
-        System.out.println(partition(c, 0, 6));
+       // System.out.println(" Der Status der Liste ist : " + arrayIsOrdered(c));
 
-        /**  ArrayList<Integer> a = new ArrayList<Integer>();
+       // System.out.println(partition(c, 0, 6));
+*/
+         ArrayList<Integer> a = new ArrayList<Integer>();
+
          a.add(0,1);
          a.add(1,5);
          a.add(2,3);
          a.add(3,8);
-         partitionMitte(a);
-         System.out.println(Arrays.toString(a.toArray()))
-         ***/;
+         //partitionMitte(a);
+         //System.out.println(Arrays.toString(a.toArray()))
+
+        Quicksort_Lan sort = new Quicksort_Lan(a, 0, 0, 0);
+        sort.partitionMitte(a, 0,3);
+
+
 
 
 

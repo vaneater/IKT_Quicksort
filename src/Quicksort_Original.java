@@ -87,3 +87,6 @@ public class Quicksort_Original extends ProfiledClass {
         profiler.printResults();
     }
 }
+// original befehl zum starten:
+// java -cp Demo.jar de.htwberlin.fiw.quick.QuickSort EINGABEDATEI 10000
+
