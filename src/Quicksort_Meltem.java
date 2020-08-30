@@ -90,22 +90,24 @@ public class Quicksort_Meltem {
 
     static void partitionMitte(ArrayList<Integer> a) {
 
-        int pivot = (a.get(a.size()/2));
+        int wertPivot = (a.get(a.size()/2));
         int index = 0;
-        int high = a.get(a.size()-1);
+        int wertHigh = a.get(a.size()-1);
 
-        for(int x = 0; x<4; x++)
+        for(int x = 0; x<a.size()-1; x++)
         {
-            if(a.get(index) < pivot)
+            if(a.get(index) < wertPivot)
             {
                 index++;
             }
             else
             {
                 int wertLow = a.get(index);
-                int temp = wertLow;
-                a.add(pivot, temp);
-                a.
+                int indexPivot = a.indexOf(wertPivot);
+                a.add(indexPivot+1, wertLow);
+                a.remove(index);
+                System.out.println(wertPivot);
+                System.out.println(a);
                         // PROBLEM: "tauschen" funktioniert (noch) nicht ohne hinzufügen+löschen
             }
         }
@@ -150,9 +152,17 @@ public class Quicksort_Meltem {
         ArrayList<Integer> a = new ArrayList<Integer>();
 
         a.add(0,1);
-        a.add(1,5);
-        a.add(2,3);
-        a.add(3,8);
+        a.add(1,67);
+        a.add(2,3000);
+        a.add(3,89);
+        a.add(4,800);
+        a.add(5,49);
+        a.add(6,86);
+        a.add(7,28);
+        a.add(8,99);
+        a.add(9,45);
+        a.add(10,2);
+
         //partitionMitte(a);
         //System.out.println(Arrays.toString(a.toArray()))
 
